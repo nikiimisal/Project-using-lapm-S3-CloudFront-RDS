@@ -62,12 +62,12 @@ ssh -i server1.pem ec2-user@<EC2-Public-IP>
 
 ---
 
-# 2️⃣ Install Web Server (Nginx + PHP)
+# 2️⃣ Install Web Server (Nginx + PHP + Mariadb)
 
 Install **Nginx, PHP and MySQL client**.
 
 ```
-sudo yum install nginx php php-fpm php-mysqlnd mariadb -y
+sudo yum install nginx php php-fpm php-mysqlnd mariadb105 -y
 ```
 
 Start and enable **Nginx**.
@@ -131,7 +131,7 @@ sudo chmod -R 777 uploads
 Connect to the **RDS MySQL database** from the EC2 instance.
 
 ```
-mysql -h namedb.cl8mw8agi9uc.eu-north-1.rds.amazonaws.com -u admin -p
+mysql -h < RDS ENDPOINT HERE > -u admin -p
 ```
 
 After login, create database and table if required.
@@ -152,22 +152,13 @@ caption VARCHAR(200)
 
 # 6️⃣ Install AWS SDK (Composer)
 
-Install **Composer** and the **AWS PHP SDK**.
-
 ```
-curl -sS https://getcomposer.org/installer | php
-sudo mv composer.phar /usr/local/bin/composer
+ sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+ sudo php composer-setup.php
+ sudo php -d memory_limit=-1 composer.phar require aws/aws-sdk-php
+ sudo cp composer.phar /usr/local/bin/composer
+ composer --version
 ```
-
-Install AWS SDK:
-
-```
-composer require aws/aws-sdk-php
-```
-
-This creates the **vendor/** directory used by the PHP application.
-
----
 
 # 7️⃣ Create S3 Bucket
 
