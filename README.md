@@ -139,12 +139,14 @@ After login, create database and table if required.
 Example table structure:
 
 ```
-CREATE TABLE posts(
-id INT AUTO_INCREMENT PRIMARY KEY,
-name VARCHAR(20),
-url VARCHAR(200),
-cfurl VARCHAR(200),
-caption VARCHAR(200)
+create database facebook;
+Use facebook;
+CREATE TABLE posts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(20) NOT NULL,
+    url VARCHAR(200),
+    cfurl VARCHAR(200),
+    caption VARCHAR(200)
 );
 ```
 
