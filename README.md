@@ -1,4 +1,4 @@
-# project-using-lapm-S3-CloudFront-RDS
+# Project-using-lapm-S3-CloudFront-RDS
 
 <h1>QUick Recap Steps</h1>
 
